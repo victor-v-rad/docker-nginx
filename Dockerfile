@@ -41,7 +41,7 @@ RUN /bin/bash -e /security_updates.sh && \
 #        unattended-upgrades \
 #        python* \
 #    && \
-    /bin/bash -e /clean.sh
+#    /bin/bash -e /clean.sh
 
 ## Overlay the root filesystem from this repo
 #COPY --chown=www-data ./container/root /
