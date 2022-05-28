@@ -43,18 +43,18 @@ RUN /bin/bash -e /security_updates.sh && \
 #    && \
     /bin/bash -e /clean.sh
 
-# Overlay the root filesystem from this repo
-COPY --chown=www-data ./container/root /
-
-# Set nginx to listen on defined port
-# NOTE: order of operations is important, new config had to already installed from repo (above)
-# - Make temp directory for .nginx runtime files
-# - Fix woff mime type support
-# Set permissions to allow image to be run under a non root user
-RUN sed -i "s/listen [0-9]*;/listen ${CONTAINER_PORT};/" $CONF_NGINX_SITE && \
-    mkdir /tmp/.nginx && \
-    /bixn/bash -e /scripts/fix_woff_support.sh && \
-    /bin/bash -e /scripts/set_permissions.sh
-
-RUN goss -g /tests/ubuntu/nginx.goss.yaml validate && \
-    /aufs_hack.sh
+## Overlay the root filesystem from this repo
+#COPY --chown=www-data ./container/root /
+#
+## Set nginx to listen on defined port
+## NOTE: order of operations is important, new config had to already installed from repo (above)
+## - Make temp directory for .nginx runtime files
+## - Fix woff mime type support
+## Set permissions to allow image to be run under a non root user
+#RUN sed -i "s/listen [0-9]*;/listen ${CONTAINER_PORT};/" $CONF_NGINX_SITE && \
+#    mkdir /tmp/.nginx && \
+#    /bixn/bash -e /scripts/fix_woff_support.sh && \
+#    /bin/bash -e /scripts/set_permissions.sh
+#
+#RUN goss -g /tests/ubuntu/nginx.goss.yaml validate && \
+#    /aufs_hack.sh
