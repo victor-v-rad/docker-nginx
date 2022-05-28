@@ -12,6 +12,8 @@ ENV CONTAINER_ROLE=web \
 # Using a non-privileged port to prevent having to use setcap internally
 EXPOSE ${CONTAINER_PORT}
 
+RUN bash -c "install -m755 <(printf '#!/bin/sh\nexit 0') /usr/sbin/policy-rc.d"
+
 # - Update security packages, plus ca-certificates required for https
 # - Install pre-reqs
 # - Install latest nginx (development PPA is actually mainline development)
@@ -48,7 +50,7 @@ COPY --chown=www-data ./container/root /
 # Set permissions to allow image to be run under a non root user
 RUN sed -i "s/listen [0-9]*;/listen ${CONTAINER_PORT};/" $CONF_NGINX_SITE && \
     mkdir /tmp/.nginx && \
-    /bin/bash -e /scripts/fix_woff_support.sh && \
+    /bixn/bash -e /scripts/fix_woff_support.sh && \
     /bin/bash -e /scripts/set_permissions.sh
 
 RUN goss -g /tests/ubuntu/nginx.goss.yaml validate && \
