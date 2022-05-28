@@ -12,15 +12,15 @@ ENV CONTAINER_ROLE=web \
 # Using a non-privileged port to prevent having to use setcap internally
 EXPOSE ${CONTAINER_PORT}
 
-RUN bash -c "install -m755 <(printf '#!/bin/sh\nexit 0') /usr/sbin/policy-rc.d"
+RUN #bash -c "install -m755 <(printf '#!/bin/sh\nexit 0') /usr/sbin/policy-rc.d"
 
 # - Update security packages, plus ca-certificates required for https
 # - Install pre-reqs
 # - Install latest nginx (development PPA is actually mainline development)
 # - Perform cleanup, ensure unnecessary packages are removed
-RUN /bin/bash -e /security_updates.sh && \
-    apt-get install --no-install-recommends -yqq \
-        software-properties-common \
+#RUN /bin/bash -e /security_updates.sh && \
+#    apt-get install --no-install-recommends -yqq \
+#        software-properties-common \
 #    && \
 #    sudo rm /etc/resolv.conf  && \
 #    sudo ln -s ../run/resolvconf/resolv.conf /etc/resolv.conf  && \
