@@ -25,6 +25,7 @@ RUN /bin/bash -e /security_updates.sh && \
     apt-get install -yqq --no-install-recommends \
         nginx-light \
         ca-certificates \
+        gpg-agent \
     && \
     apt-get remove --purge -yq \
         manpages \
