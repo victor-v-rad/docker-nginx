@@ -10,7 +10,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     env:
-      IMAGE_BASE: behance/docker-nginx
+      IMAGE_BASE: victor-v-rad/docker-nginx
     strategy:
       matrix:
         props:
