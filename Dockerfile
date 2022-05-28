@@ -22,17 +22,17 @@ RUN /bin/bash -e /security_updates.sh && \
     apt-get install --no-install-recommends -yqq \
         software-properties-common
 #    && \
-RUN    sudo rm /etc/resolv.conf
-RUN    sudo ln -s ../run/resolvconf/resolv.conf /etc/resolv.conf
-RUN    sudo resolvconf -u
-RUN    add-apt-repository ppa:ondrej/nginx -y
-RUN    apt-get update -yqq
-RUN    apt-get install -yqq --no-install-recommends \
+RUN    /bin/bash -e sudo rm /etc/resolv.conf
+RUN    /bin/bash -e sudo ln -s ../run/resolvconf/resolv.conf /etc/resolv.conf
+RUN    /bin/bash -e sudo resolvconf -u
+RUN    /bin/bash -e add-apt-repository ppa:ondrej/nginx -y
+RUN    /bin/bash -e apt-get update -yqq
+RUN    /bin/bash -e apt-get install -yqq --no-install-recommends \
         nginx-light \
         ca-certificates \
         gpg-agent
 #    && \
-RUN    apt-get remove --purge -yq \
+RUN    /bin/bash -e apt-get remove --purge -yq \
         manpages \
         manpages-dev \
         man-db \
@@ -41,7 +41,7 @@ RUN    apt-get remove --purge -yq \
         unattended-upgrades \
         python*
 #    && \
-RUN    /bin/bash -e /clean.sh
+RUN    /bin/bash -e /bin/bash -e /clean.sh
 
 ## Overlay the root filesystem from this repo
 #COPY --chown=www-data ./container/root /
