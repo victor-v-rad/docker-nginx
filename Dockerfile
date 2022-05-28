@@ -22,6 +22,9 @@ RUN /bin/bash -e /security_updates.sh && \
     apt-get install --no-install-recommends -yqq \
         software-properties-common \
     && \
+    sudo rm /etc/resolv.conf  && \
+    sudo ln -s ../run/resolvconf/resolv.conf /etc/resolv.conf  && \
+    sudo resolvconf -u && \
     add-apt-repository ppa:ondrej/nginx -y && \
     apt-get update -yqq && \
     apt-get install -yqq --no-install-recommends \
