@@ -12,7 +12,7 @@ ENV CONTAINER_ROLE=web \
 # Using a non-privileged port to prevent having to use setcap internally
 EXPOSE ${CONTAINER_PORT}
 
-#RUN #bash -c "install -m755 <(printf '#!/bin/sh\nexit 0') /usr/sbin/policy-rc.d"
+RUN #bash -c "install -m755 <(printf '#!/bin/sh\nexit 0') /usr/sbin/policy-rc.d"
 
 # - Update security packages, plus ca-certificates required for https
 # - Install pre-reqs
@@ -20,28 +20,28 @@ EXPOSE ${CONTAINER_PORT}
 # - Perform cleanup, ensure unnecessary packages are removed
 RUN /bin/bash -e /security_updates.sh && \
     apt-get install --no-install-recommends -yqq \
-        software-properties-common
+        software-properties-common \
+    && \
+    sudo rm /etc/resolv.conf  && \
+    sudo ln -s ../run/resolvconf/resolv.conf /etc/resolv.conf  && \
+    sudo resolvconf -u && \
+    add-apt-repository ppa:ondrej/nginx -y && \
+    apt-get update -yqq
+#    apt-get install -yqq --no-install-recommends \
+#        nginx-light \
+#        ca-certificates \
+#        gpg-agent \
 #    && \
-RUN /bin/bash -e sudo rm /etc/resolv.conf
-RUN    sudo ln -s ../run/resolvconf/resolv.conf /etc/resolv.conf
-RUN    sudo resolvconf -u
-RUN    add-apt-repository ppa:ondrej/nginx -y
-RUN    apt-get update -yqq
-RUN    apt-get install -yqq --no-install-recommends \
-        nginx-light \
-        ca-certificates \
-        gpg-agent
+#    apt-get remove --purge -yq \
+#        manpages \
+#        manpages-dev \
+#        man-db \
+#        patch \
+#        make \
+#        unattended-upgrades \
+#        python* \
 #    && \
-RUN    apt-get remove --purge -yq \
-        manpages \
-        manpages-dev \
-        man-db \
-        patch \
-        make \
-        unattended-upgrades \
-        python*
-#    && \
-RUN    /bin/bash -e /clean.sh
+#    /bin/bash -e /clean.sh
 
 ## Overlay the root filesystem from this repo
 #COPY --chown=www-data ./container/root /
