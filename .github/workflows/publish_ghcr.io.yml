@@ -7,10 +7,10 @@ name: publish_ghcr.io
 
 on:
   workflow_dispatch:
+  push:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build-and-push-image:
@@ -34,7 +34,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/latest
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
