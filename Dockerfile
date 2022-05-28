@@ -32,15 +32,15 @@ RUN /bin/bash -e /security_updates.sh && \
         ca-certificates \
         gpg-agent \
     && \
-    apt-get remove --purge -yq \
-        manpages \
-        manpages-dev \
-        man-db \
-        patch \
-        make \
-        unattended-upgrades \
-        python* \
-    && \
+#    apt-get remove --purge -yq \
+#        manpages \
+#        manpages-dev \
+#        man-db \
+#        patch \
+#        make \
+#        unattended-upgrades \
+#        python* \
+#    && \
     /bin/bash -e /clean.sh
 
 # Overlay the root filesystem from this repo
