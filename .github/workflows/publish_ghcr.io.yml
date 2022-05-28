@@ -11,7 +11,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ env.REGISTRY }}/${{ github.repository }}:latest
+  IMAGE_NAME: ghcr.io/victor-v-rad/docker-nginx:latest
 
 jobs:
   build-and-push-image:
