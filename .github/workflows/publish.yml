@@ -38,9 +38,6 @@ jobs:
         with:
           images: ${{ env.IMAGE_BASE }}
           tags: |
-#            type=semver,pattern={{major}}.{{minor}}.{{patch}}
-#            type=semver,pattern={{major}}.{{minor}}
-#            type=semver,pattern={{major}}
             type=edge
           flavor: |
             latest=auto
