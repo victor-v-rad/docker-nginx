@@ -11,6 +11,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
+  UBUNTU_VER: ubuntu-20.04
   IMAGE_NAME: ghcr.io/${{ github.repository }}
 
 jobs:
@@ -38,6 +39,7 @@ jobs:
           images: ${{ env.IMAGE_NAME }}
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=${{ env.UBUNTU_VER }},enable={{is_default_branch}}
 
       -
         name: Set up QEMU
