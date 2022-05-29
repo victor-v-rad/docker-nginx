@@ -23,6 +23,7 @@ RUN /bin/bash -e /security_updates.sh && \
     add-apt-repository ppa:ondrej/nginx -y && \
     apt-get update -yqq && \
     apt-get install -yqq --no-install-recommends \
+        libgcrypt\
         gpg-agent \
         nginx-light \
         ca-certificates \
