@@ -1,4 +1,4 @@
-FROM behance/docker-base:5.0.1-ubuntu-22.04
+FROM behance/docker-base:4.0-ubuntu-20.04
 
 # Use in multi-phase builds, when an init process requests for the container to gracefully exit, so that it may be committed
 # Used with alternative CMD (worker.sh), leverages supervisor to maintain long-running processes
@@ -23,8 +23,6 @@ RUN /bin/bash -e /security_updates.sh && \
     add-apt-repository ppa:ondrej/nginx -y && \
     apt-get update -yqq && \
     apt-get install -yqq --no-install-recommends \
-        libgcrypt\
-        gpg-agent \
         nginx-light \
         ca-certificates \
     && \
